@@ -1,0 +1,18 @@
+class KonsoleTask extends DefaultTask {
+    @Input
+    String command
+
+    @TaskAction
+    void launchKonsole() {
+        ext.process = new ProcessBuilder()
+                .directory(project.projectDir)
+                .command('konsole', '--noclose', '-e', command)
+                .start()
+    }
+}
+
+task jupyter(type: KonsoleTask) {
+    command = "docker run --rm -p 8888:8888 -e " +
+            "JUPYTER_ENABLE_LAB=yes -v $projectDir:/home/jovyan/work " +
+            "jupyter/datascience-notebook:latest"
+}
