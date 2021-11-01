@@ -1,3 +1,3 @@
-FROM jupyter/datascience-notebook:python-3.8.6
+FROM jupyter/datascience-notebook
 
-RUN pip install Arbie==0.3.2
+RUN pip install Arbie
